@@ -1,5 +1,7 @@
 #!/bin/bash
-[[ -n "$__COLOR_LOADED" ]] && return
+if [[ -n "${__COLOR_LOADED:-}" ]]; then
+    return
+fi
 export __COLOR_LOADED=1
 
 # 颜色定义

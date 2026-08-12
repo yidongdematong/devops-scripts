@@ -13,7 +13,7 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../../" && pwd)"
 
 # 加载颜色和配置
 source "$PROJECT_ROOT/lib/color.sh"
-source "$PROJECT_ROOT/config/global.env"
+source "$PROJECT_ROOT/config/global/global.env"
 
 # 确保日志目录存在
 mkdir -p "$LOG_DIR"
@@ -32,5 +32,4 @@ docker volume prune -f
 
 info "Docker resources pruned"
 
-# 记录完成
 info "$(date): Docker cleanup completed."
