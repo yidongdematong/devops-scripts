@@ -26,10 +26,14 @@ info "$(date): Starting Docker cleanup..."
 find /var/lib/docker/containers -name "*-json.log" -mtime +$DOCKER_LOG_RETENTION_DAYS -exec truncate -s 0 {} \;
 info "Docker logs cleaned (retention: ${DOCKER_LOG_RETENTION_DAYS} days)"
 
-# 清理 Docker 资源
-docker system prune -f
+#清理容器、网络、虚悬镜像，所有未使用的镜像 ,保留数据卷
+docker system prune -a --force
+# 清理未使用的 Volume
 docker volume prune -f
+# 清理 7天前未使用的镜像
+# docker image prune --force -a --filter "until=7d"
 
 info "Docker resources pruned"
 
+# 记录完成
 info "$(date): Docker cleanup completed."
